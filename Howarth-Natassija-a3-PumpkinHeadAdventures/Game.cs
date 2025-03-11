@@ -20,7 +20,6 @@ namespace MohawkGame2D
         Texture2D Platform2 = 
             Graphics.LoadTexture("../../../../assets/graphics/Platform2.png");
 
-
         Texture2D PumpkinHead =
             Graphics.LoadTexture("../../../../assets/graphics/PumpkinHead.png");
 
@@ -54,7 +53,7 @@ namespace MohawkGame2D
             Window.ClearBackground(Color.OffWhite);
 
             Graphics.Draw(Platform1, 0, 0);
-            Graphics.Draw(Platform2, 0, 0);
+            Graphics.Draw(Platform2, -292, 241);
             Graphics.Draw(PumpkinHead, 250, 265);
             Graphics.Draw(Bats, 100, 70);
             Graphics.Draw(Candy2, 100, 65);
