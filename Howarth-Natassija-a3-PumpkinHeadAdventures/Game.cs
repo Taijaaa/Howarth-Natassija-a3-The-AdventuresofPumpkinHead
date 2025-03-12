@@ -14,15 +14,15 @@ namespace MohawkGame2D
     {
         // Place your variables here:
 
-        
-        // BACKGRROUND
+        int platform1Y = 420;
+        float pumpkinHeadY = 490;
+        float pumpkinHeadX = 190;
 
+        // BACKGRROUND
         Texture2D Background =
             Graphics.LoadTexture("../../../../assets/graphics/Background.png");
 
         // PLATFORMS:
-
-        
         Texture2D Platform1 = 
             Graphics.LoadTexture("../../../../assets/graphics/Platform1.png");
 
@@ -92,6 +92,8 @@ namespace MohawkGame2D
         Texture2D Candy3 =
             Graphics.LoadTexture("../../../../assets/graphics/Candy2.png");
 
+
+
         /// <summary>
         ///     Setup runs once before the game loop begins.
         /// </summary>
@@ -128,7 +130,7 @@ namespace MohawkGame2D
 
             Graphics.Draw(Platform4, 100, 445);
 
-            Graphics.Draw(Platform1, 0, 420);
+            Graphics.Draw(Platform1, 0, platform1Y);
 
             Graphics.Draw(Platform2, 50, 500);
 
@@ -152,7 +154,7 @@ namespace MohawkGame2D
             Graphics.Draw(Platform10, 685, 570);
 
 
-            Graphics.Draw(PumpkinHead, 190, 490);
+            Graphics.Draw(PumpkinHead, pumpkinHeadX, pumpkinHeadY);
 
             Graphics.Draw(Bats, 200, 390);
             Graphics.Draw(Bats2, 487, 530);
