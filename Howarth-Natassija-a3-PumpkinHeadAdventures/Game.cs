@@ -14,6 +14,9 @@ namespace MohawkGame2D
     {
         // Place your variables here:
 
+        Texture2D Background =
+            Graphics.LoadTexture("../../../../assets/graphics/Background.png");
+
         Texture2D Platform1 = 
             Graphics.LoadTexture("../../../../assets/graphics/Platform1.png");
 
@@ -36,7 +39,7 @@ namespace MohawkGame2D
             Graphics.LoadTexture("../../../../assets/graphics/Platform4.png");
 
         Texture2D Platform8 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform2.png");
+            Graphics.LoadTexture("../../../../assets/graphics/Platform6.png");
 
         Texture2D Bridge1 =
             Graphics.LoadTexture("../../../../assets/graphics/Bridge1.png");
@@ -75,32 +78,33 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(Color.OffWhite);
+            Graphics.Draw(Background, 0, 0);
 
             // bridge railing
 
-            Graphics.Draw(Bridge1, 260, 470);
+            Graphics.Draw(Bridge1, 260, 455);
 
             // bridge plank 
 
-            Graphics.Draw(Bridge2, 260, 486);
+            Graphics.Draw(Bridge2, 260, 471);
 
             // left side platforms
 
-            Graphics.Draw(Platform4, 100, 460);
+            Graphics.Draw(Platform4, 100, 445);
 
             Graphics.Draw(Platform1, 0, 420);
 
             Graphics.Draw(Platform2, 60, 500);
 
-            Graphics.Draw(Platform3, 55, 570);
+            Graphics.Draw(Platform3, 30, 570);
 
             // right side platforms
 
-            Graphics.Draw(Platform8, 570, 410);
+            Graphics.Draw(Platform8, 570, 395);
 
             Graphics.Draw(Platform5, 453, 445);
 
-            Graphics.Draw(Platform7, 520, 500);
+            Graphics.Draw(Platform7, 510, 500);
 
             Graphics.Draw(Platform6, 400, 570);
 
@@ -109,9 +113,9 @@ namespace MohawkGame2D
 
 
 
-            Graphics.Draw(PumpkinHead, 250, 265);
-            Graphics.Draw(Bats, 100, 70);
-            Graphics.Draw(Candy2, 100, 65);
+            Graphics.Draw(PumpkinHead, 190, 490);
+            Graphics.Draw(Bats, 200, 350);
+            Graphics.Draw(Candy2, 500, 430);
 
 
 
