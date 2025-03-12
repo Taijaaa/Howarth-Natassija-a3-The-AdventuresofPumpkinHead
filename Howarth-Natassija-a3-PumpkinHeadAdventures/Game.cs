@@ -14,14 +14,20 @@ namespace MohawkGame2D
     {
         // Place your variables here:
 
+        
+        // BACKGRROUND
+
         Texture2D Background =
             Graphics.LoadTexture("../../../../assets/graphics/Background.png");
 
+        // PLATFORMS:
+
+        
         Texture2D Platform1 = 
             Graphics.LoadTexture("../../../../assets/graphics/Platform1.png");
 
         Texture2D Platform2 = 
-            Graphics.LoadTexture("../../../../assets/graphics/Platform2.png");
+            Graphics.LoadTexture("../../../../assets/graphics/Platform6.png");
 
         Texture2D Platform3 =
             Graphics.LoadTexture("../../../../assets/graphics/Platform3.png");
@@ -41,22 +47,50 @@ namespace MohawkGame2D
         Texture2D Platform8 =
             Graphics.LoadTexture("../../../../assets/graphics/Platform6.png");
 
+        Texture2D Platform9 =
+            Graphics.LoadTexture("../../../../assets/graphics/Platform6.png");
+
+        Texture2D Platform10 =
+            Graphics.LoadTexture("../../../../assets/graphics/Platform3.png");
+
+        Texture2D Platform11 =
+            Graphics.LoadTexture("../../../../assets/graphics/Platform11.png");
+
+        Texture2D Platform12 =
+            Graphics.LoadTexture("../../../../assets/graphics/Platform11.png");
+
+
+        // BRIDGES:
+
         Texture2D Bridge1 =
             Graphics.LoadTexture("../../../../assets/graphics/Bridge1.png");
 
         Texture2D Bridge2 =
             Graphics.LoadTexture("../../../../assets/graphics/Bridge2.png");
 
+        // PUMPKIN HEAD:
+
         Texture2D PumpkinHead =
             Graphics.LoadTexture("../../../../assets/graphics/PumpkinHead.png");
+
+        // BATS:
 
         Texture2D Bats =
             Graphics.LoadTexture("../../../../assets/graphics/Bats.png");
 
+        Texture2D Bats2 =
+            Graphics.LoadTexture("../../../../assets/graphics/Bats.png");
+
+        Texture2D Bats3 =
+            Graphics.LoadTexture("../../../../assets/graphics/Bats.png");
+
+        // CANDY:
+
         Texture2D Candy2 =
             Graphics.LoadTexture("../../../../assets/graphics/Candy2.png");
 
-
+        Texture2D Candy3 =
+            Graphics.LoadTexture("../../../../assets/graphics/Candy2.png");
 
         /// <summary>
         ///     Setup runs once before the game loop begins.
@@ -80,43 +114,52 @@ namespace MohawkGame2D
             Window.ClearBackground(Color.OffWhite);
             Graphics.Draw(Background, 0, 0);
 
-            // bridge railing
+            // bridge railing:
 
             Graphics.Draw(Bridge1, 260, 455);
 
-            // bridge plank 
+            // bridge plank :
 
             Graphics.Draw(Bridge2, 260, 471);
 
-            // left side platforms
+            // left side platforms:
+
+            Graphics.Draw(Platform12, 45, 360);
 
             Graphics.Draw(Platform4, 100, 445);
 
             Graphics.Draw(Platform1, 0, 420);
 
-            Graphics.Draw(Platform2, 60, 500);
+            Graphics.Draw(Platform2, 50, 500);
 
-            Graphics.Draw(Platform3, 30, 570);
+            Graphics.Draw(Platform3, 20, 570);
 
-            // right side platforms
 
-            Graphics.Draw(Platform8, 570, 395);
+            // right side platforms:
+
+            Graphics.Draw(Platform11, 655, 330);
+
+            Graphics.Draw(Platform9, 706, 460);
+
+            Graphics.Draw(Platform8, 570, 385);
 
             Graphics.Draw(Platform5, 453, 445);
 
-            Graphics.Draw(Platform7, 510, 500);
+            Graphics.Draw(Platform7, 555, 505);
 
-            Graphics.Draw(Platform6, 400, 570);
+            Graphics.Draw(Platform6, 370, 570);
 
-            
-
-
+            Graphics.Draw(Platform10, 685, 570);
 
 
             Graphics.Draw(PumpkinHead, 190, 490);
-            Graphics.Draw(Bats, 200, 350);
-            Graphics.Draw(Candy2, 500, 430);
 
+            Graphics.Draw(Bats, 200, 390);
+            Graphics.Draw(Bats2, 487, 530);
+            Graphics.Draw(Bats3, 600, 350);
+
+            Graphics.Draw(Candy2, 595, 375);
+            Graphics.Draw(Candy3, 71, 488);
 
 
 
