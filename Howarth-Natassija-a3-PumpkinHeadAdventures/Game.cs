@@ -15,8 +15,14 @@ namespace MohawkGame2D
         // Place your variables here:
 
         int platform1Y = 420;
-        float pumpkinHeadY = 490;
-        float pumpkinHeadX = 190;
+        Vector2 pumpkinHead;
+        Vector2 Velocity;
+
+        float playerSpeed = 175;
+        float jumpStrength = 300; // Jump force
+        float gravity = 600; // Gravity speed
+        float groundLevel = 490; // Adjust to match platform height
+
 
         // BACKGRROUND
         Texture2D Background =
@@ -103,6 +109,8 @@ namespace MohawkGame2D
         Window.SetTitle("The Adventures of Pumpkin Head");
         Window.SetSize(800, 600);
 
+        pumpkinHead = new Vector2(190, 490);
+
             string cwd = Directory.GetCurrentDirectory();
             Console.WriteLine($"DIRECTORY: {cwd}");
 
@@ -115,6 +123,22 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.OffWhite);
             Graphics.Draw(Background, 0, 0);
+
+            PlayerMovement();
+
+            // Apply gravity
+            Velocity.Y += gravity * Time.DeltaTime;
+
+            // Apply movement to the character
+            pumpkinHead += Velocity * Time.DeltaTime;
+
+            // Prevent the character from falling below the ground
+            if (pumpkinHead.Y > groundLevel)
+            {
+                pumpkinHead.Y = groundLevel;
+                Velocity.Y = 0; // Stop falling
+            }
+
 
             // bridge railing:
 
@@ -154,7 +178,7 @@ namespace MohawkGame2D
             Graphics.Draw(Platform10, 685, 570);
 
 
-            Graphics.Draw(PumpkinHead, pumpkinHeadX, pumpkinHeadY);
+            Graphics.Draw(PumpkinHead, pumpkinHead.X, pumpkinHead.Y);
 
             Graphics.Draw(Bats, 200, 390);
             Graphics.Draw(Bats2, 487, 530);
@@ -166,8 +190,29 @@ namespace MohawkGame2D
 
 
         }
+        void PlayerMovement()
+        {
 
-       
+            if (Input.IsKeyboardKeyDown(KeyboardInput.Right))
+            {
+                pumpkinHead.X += Time.DeltaTime * playerSpeed;
+            }
+
+            if (Input.IsKeyboardKeyDown(KeyboardInput.Left))
+
+            {
+                pumpkinHead.X -= Time.DeltaTime * playerSpeed;
+            }
+
+            if (Input.IsKeyboardKeyDown(KeyboardInput.Space) && pumpkinHead.Y >= groundLevel)
+            {
+
+            }
+            if (Input.IsKeyboardKeyDown(KeyboardInput.Space) && pumpkinHead.Y == groundLevel)
+            {
+                Velocity.Y = -jumpStrength; // Move up
+            }
+        }
 
 
 
