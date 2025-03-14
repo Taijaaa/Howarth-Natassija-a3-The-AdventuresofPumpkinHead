@@ -1,5 +1,6 @@
 ﻿// Include the namespaces (code libraries) you need below.
 using System;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Numerics;
 
@@ -14,136 +15,136 @@ namespace MohawkGame2D
     {
         // Place your variables here:
 
+        bool playing = false;
 
-        Platform[] platform = new Platform[13]
-        int platform1Y = 420;
+        Platform[] platforms = new Platform[13];
+        Bat[] bats = new Bat[5];
+        const float batTimerDefault = 1.5f;
+        float batTimer = batTimerDefault;
+        float batMinSpeed = 2;
+        float batMaxSpeed = 5;
+        float batMinHeight = 100;
+        float batMaxHeight = 400;
+        float batSpawnX = 900;
+
+        Candy[] candies = new Candy[3];
+        int CandyCounter = 0;
+
         Vector2 pumpkinHead;
+        Vector2 pumpkinHeadSize = new Vector2(55, 82);
+        float pumpkinHeadWidthOffset = 10;
         Vector2 Velocity;
 
         float playerSpeed = 175;
-        float jumpStrength = 300; 
-        float gravity = 600; 
-        float groundLevel = 490; 
+        float jumpStrength = 310; // Jump force
+        float gravity = 750; // Gravity speed
 
-
-        // BACKGRROUND:
+        // BACKGROUND
         Texture2D Background =
             Graphics.LoadTexture("../../../../assets/graphics/Background.png");
-
 
         // BRIDGES:
 
         Texture2D Bridge1 =
             Graphics.LoadTexture("../../../../assets/graphics/Bridge1.png");
 
-       
-
         // PUMPKIN HEAD:
 
-        Texture2D PumpkinHead =
+        Texture2D pumpkinHeadTexture =
             Graphics.LoadTexture("../../../../assets/graphics/PumpkinHead.png");
 
-        // BATS:
-
-        Texture2D Bats =
-            Graphics.LoadTexture("../../../../assets/graphics/Bats.png");
-
-        Texture2D Bats2 =
-            Graphics.LoadTexture("../../../../assets/graphics/Bats.png");
-
-        Texture2D Bats3 =
-            Graphics.LoadTexture("../../../../assets/graphics/Bats.png");
-
-        // CANDY:
-
-        Texture2D Candy2 =
-            Graphics.LoadTexture("../../../../assets/graphics/Candy2.png");
-
-        Texture2D Candy3 =
-            Graphics.LoadTexture("../../../../assets/graphics/Candy2.png");
-
-
-
-        /// <summary>
-        ///     Setup runs once before the game loop begins.
-        /// </summary>
         public void Setup()
         {
 
-        Window.SetTitle("The Adventures of Pumpkin Head");
-        Window.SetSize(800, 600);
+            Window.SetTitle("The Adventures of Pumpkin Head");
+            Window.SetSize(800, 600);
 
-        pumpkinHead = new Vector2(190, 490);
-
+            pumpkinHead = new Vector2(190, 190);
 
             platforms =
-        [
-             new Platform(new Vector2(45, 360), Platform.platform5),
-             new Platform(new Vector2(100, 445), Platform.platform4),
-             new Platform(new Vector2(0, 420), Platform.platform1),
-             new Platform(new Vector2(50, 500), Platform.platform2),
-             new Platform(new Vector2(20, 570), Platform.platform3),
-             new Platform(new Vector2(655, 330), Platform.platform5),
-             new Platform(new Vector2(706, 460), Platform.platform6),
-             new Platform(new Vector2(570, 385), Platform.platform6),
-             new Platform(new Vector2(453, 445), Platform.platform4),
-             new Platform(new Vector2(555, 505), Platform.platform4),
-             new Platform(new Vector2(370, 570), Platform.platform3),
-             new Platform(new Vector2(685, 570), Platform.platform3),
-             new Platform(new Vector2(260, 471), Platform.platform13)
-        ];
-
-
+         [
+            new Platform(new Vector2(45, 360), Platform.platform5),
+            new Platform(new Vector2(100, 445), Platform.platform4),
+            new Platform(new Vector2(0, 420), Platform.platform1),
+            new Platform(new Vector2(50, 500), Platform.platform2),
+            new Platform(new Vector2(20, 570), Platform.platform3),
+            new Platform(new Vector2(655, 330), Platform.platform5),
+            new Platform(new Vector2(706, 460), Platform.platform6),
+            new Platform(new Vector2(570, 385), Platform.platform6),
+            new Platform(new Vector2(453, 445), Platform.platform4),
+            new Platform(new Vector2(555, 505), Platform.platform4),
+            new Platform(new Vector2(370, 570), Platform.platform3),
+            new Platform(new Vector2(685, 570), Platform.platform3),
+            new Platform(new Vector2(260, 471), Platform.platform13)
+         ];
 
         }
 
-        /// <summary>
-        ///     Update runs every frame.
-        /// </summary>
         public void Update()
+        {
+            if (playing)
+            {
+                Playing();
+            }
+            else
+            {
+                Menu();
+            }
+        }
+
+        public void Menu()
+        {
+            Window.ClearBackground(Color.OffWhite);
+            Text.Draw("Press Space To Play", new Vector2(250, 250));
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.Space))
+            {
+                playing = true;
+                bats = new Bat[5];
+            }
+        }
+        
+
+        public void Playing()
         {
             Window.ClearBackground(Color.OffWhite);
             Graphics.Draw(Background, 0, 0);
 
             PlayerMovement();
 
-            // Apply gravity
-            Velocity.Y += gravity * Time.DeltaTime;
-
-            // Apply movement to the character
-            pumpkinHead += Velocity * Time.DeltaTime;
-
-            // Prevent the character from falling below the ground
-            if (pumpkinHead.Y > groundLevel)
-            {
-                pumpkinHead.Y = groundLevel;
-                Velocity.Y = 0; 
-            }
-
-
             // bridge railing:
 
             Graphics.Draw(Bridge1, 260, 455);
 
-            // bridge plank :
+            foreach (var platform in platforms)
+            {
+                platform.Render();
+            }
 
-            Graphics.Draw(Bridge2, 260, 471);
-
-
-            Graphics.Draw(PumpkinHead, pumpkinHead.X, pumpkinHead.Y);
-
-            Graphics.Draw(Bats, 200, 390);
-            Graphics.Draw(Bats2, 487, 530);
-            Graphics.Draw(Bats3, 600, 350);
-
-            Graphics.Draw(Candy2, 595, 375);
-            Graphics.Draw(Candy3, 71, 488);
-
-
-
+            Graphics.Draw(pumpkinHeadTexture, pumpkinHead.X, pumpkinHead.Y);
+            UpdateCandy();
+            UpdateBats();
         }
         void PlayerMovement()
         {
+            bool grounded = false;
+
+            foreach (var platform in platforms)
+            {
+                // Is pumpkin head in line with the platform horizontally
+                if ((pumpkinHead.X + pumpkinHeadWidthOffset > platform.position.X && pumpkinHead.X < platform.position.X + platform.width)
+                    || (pumpkinHead.X + pumpkinHeadSize.X - pumpkinHeadWidthOffset > platform.position.X && pumpkinHead.X + pumpkinHeadSize.X < platform.position.X + platform.width))
+                {
+                    // Is pumpkin head on top of the platform
+                    if (pumpkinHead.Y + pumpkinHeadSize.Y < platform.position.Y + platform.height / 2
+                        && pumpkinHead.Y + pumpkinHeadSize.Y > platform.position.Y - platform.height / 2)
+                    {
+                        grounded = true;
+                        Velocity = new Vector2(Velocity.X, 0);
+                        pumpkinHead = new Vector2(pumpkinHead.X, platform.position.Y - pumpkinHeadSize.Y);
+                    }
+                }
+            }
 
             if (Input.IsKeyboardKeyDown(KeyboardInput.Right))
             {
@@ -156,18 +157,96 @@ namespace MohawkGame2D
                 pumpkinHead.X -= Time.DeltaTime * playerSpeed;
             }
 
-            if (Input.IsKeyboardKeyDown(KeyboardInput.Space) && pumpkinHead.Y >= groundLevel)
-            {
-
-            }
-            if (Input.IsKeyboardKeyDown(KeyboardInput.Space) && pumpkinHead.Y == groundLevel)
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.Space) && grounded)
             {
                 Velocity.Y = -jumpStrength; // Move up
             }
+
+            if (!grounded)
+            {
+                Velocity.Y += gravity * Time.DeltaTime;
+            }
+
+            // Apply movement to the character
+            pumpkinHead += Velocity * Time.DeltaTime;
+
         }
 
 
+        void UpdateCandy()
+        {
+            for (int i = 0; i < candies.Length; i++)
+            {
+                if (candies[i] == null)
+                {
+                    candies[i] = new Candy();
+                    break;
+                }
+                else
+                {
 
+                    Graphics.Draw(candies[i].texture, candies[i].position);
+                }
+
+                if (Vector2.Distance(candies[i].position, pumpkinHead + pumpkinHeadSize / 2) < 30f)
+                {
+                    candies[i] = null;
+
+                    CandyCounter++;
+
+                }
+
+            }
+
+            Text.Draw(CandyCounter.ToString(), new Vector2(400, 0));
+
+
+        }
+        void UpdateBats()
+        {
+            if (batTimer > 0)
+            {
+                batTimer -= Time.DeltaTime;
+            }
+            else
+            {
+                batTimer = batTimerDefault;
+                for (int i = 0; i < bats.Length; i++)
+                {
+                    if (bats[i] == null)
+                    {
+                        bats[i] = new Bat(new Vector2(batSpawnX, Random.Float(batMinHeight, batMaxHeight)), new Vector2(-Random.Float(batMinSpeed, batMaxSpeed), 0));
+                        break;
+                    }
+                    else
+                    {
+                        if (bats[i].position.X < 0 - bats[i].size.X)
+                        {
+                            bats[i] = null;
+                        }
+                    }
+                }
+            }
+
+            foreach (Bat bat in bats)
+            {
+                if (bat is not null)
+                {
+                    bat.position += bat.velocity;
+                    Graphics.Draw(bat.texture, bat.position);
+
+                    if (Vector2.Distance(bat.position, pumpkinHead + pumpkinHeadSize / 2) < 40f)
+                    {
+                        playing = false;
+                    }
+                    if (pumpkinHead.Y > Window.Height)
+                    {
+                        playing = false;
+
+                    }
+
+                }
+            }
+        }
     }
-
 }
