@@ -14,6 +14,8 @@ namespace MohawkGame2D
     {
         // Place your variables here:
 
+
+        Platform[] platform = new Platform[13]
         int platform1Y = 420;
         Vector2 pumpkinHead;
         Vector2 Velocity;
@@ -28,51 +30,13 @@ namespace MohawkGame2D
         Texture2D Background =
             Graphics.LoadTexture("../../../../assets/graphics/Background.png");
 
-        // PLATFORMS:
-        Texture2D Platform1 = 
-            Graphics.LoadTexture("../../../../assets/graphics/Platform1.png");
-
-        Texture2D Platform2 = 
-            Graphics.LoadTexture("../../../../assets/graphics/Platform6.png");
-
-        Texture2D Platform3 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform3.png");
-
-        Texture2D Platform4 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform4.png");
-
-        Texture2D Platform5 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform4.png");
-
-        Texture2D Platform6 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform3.png");
-
-        Texture2D Platform7 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform4.png");
-
-        Texture2D Platform8 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform6.png");
-
-        Texture2D Platform9 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform6.png");
-
-        Texture2D Platform10 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform3.png");
-
-        Texture2D Platform11 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform11.png");
-
-        Texture2D Platform12 =
-            Graphics.LoadTexture("../../../../assets/graphics/Platform11.png");
-
 
         // BRIDGES:
 
         Texture2D Bridge1 =
             Graphics.LoadTexture("../../../../assets/graphics/Bridge1.png");
 
-        Texture2D Bridge2 =
-            Graphics.LoadTexture("../../../../assets/graphics/Bridge2.png");
+       
 
         // PUMPKIN HEAD:
 
@@ -111,8 +75,25 @@ namespace MohawkGame2D
 
         pumpkinHead = new Vector2(190, 490);
 
-            string cwd = Directory.GetCurrentDirectory();
-            Console.WriteLine($"DIRECTORY: {cwd}");
+
+            platforms =
+        [
+             new Platform(new Vector2(45, 360), Platform.platform5),
+             new Platform(new Vector2(100, 445), Platform.platform4),
+             new Platform(new Vector2(0, 420), Platform.platform1),
+             new Platform(new Vector2(50, 500), Platform.platform2),
+             new Platform(new Vector2(20, 570), Platform.platform3),
+             new Platform(new Vector2(655, 330), Platform.platform5),
+             new Platform(new Vector2(706, 460), Platform.platform6),
+             new Platform(new Vector2(570, 385), Platform.platform6),
+             new Platform(new Vector2(453, 445), Platform.platform4),
+             new Platform(new Vector2(555, 505), Platform.platform4),
+             new Platform(new Vector2(370, 570), Platform.platform3),
+             new Platform(new Vector2(685, 570), Platform.platform3),
+             new Platform(new Vector2(260, 471), Platform.platform13)
+        ];
+
+
 
         }
 
@@ -147,35 +128,6 @@ namespace MohawkGame2D
             // bridge plank :
 
             Graphics.Draw(Bridge2, 260, 471);
-
-            // left side platforms:
-
-            Graphics.Draw(Platform12, 45, 360);
-
-            Graphics.Draw(Platform4, 100, 445);
-
-            Graphics.Draw(Platform1, 0, platform1Y);
-
-            Graphics.Draw(Platform2, 50, 500);
-
-            Graphics.Draw(Platform3, 20, 570);
-
-
-            // right side platforms:
-
-            Graphics.Draw(Platform11, 655, 330);
-
-            Graphics.Draw(Platform9, 706, 460);
-
-            Graphics.Draw(Platform8, 570, 385);
-
-            Graphics.Draw(Platform5, 453, 445);
-
-            Graphics.Draw(Platform7, 555, 505);
-
-            Graphics.Draw(Platform6, 370, 570);
-
-            Graphics.Draw(Platform10, 685, 570);
 
 
             Graphics.Draw(PumpkinHead, pumpkinHead.X, pumpkinHead.Y);
