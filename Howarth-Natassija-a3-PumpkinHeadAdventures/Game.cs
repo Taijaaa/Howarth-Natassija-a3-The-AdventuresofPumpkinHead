@@ -42,6 +42,8 @@ namespace MohawkGame2D
         // BACKGROUND
         Texture2D Background =
             Graphics.LoadTexture("../../../../assets/graphics/Background.png");
+        Texture2D StartScreen =
+            Graphics.LoadTexture("../../../../assets/graphics/StartScreen.png");
 
         // BRIDGES:
 
@@ -95,7 +97,7 @@ namespace MohawkGame2D
         public void Menu()
         {
             Window.ClearBackground(Color.OffWhite);
-            Text.Draw("Press Space To Play", new Vector2(250, 250));
+            Graphics.Draw(StartScreen, 0, 0);
 
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Space))
             {
