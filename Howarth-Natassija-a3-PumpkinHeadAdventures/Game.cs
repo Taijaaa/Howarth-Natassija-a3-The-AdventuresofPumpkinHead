@@ -19,12 +19,12 @@ namespace MohawkGame2D
         Vector2 Velocity;
 
         float playerSpeed = 175;
-        float jumpStrength = 300; // Jump force
-        float gravity = 600; // Gravity speed
-        float groundLevel = 490; // Adjust to match platform height
+        float jumpStrength = 300; 
+        float gravity = 600; 
+        float groundLevel = 490; 
 
 
-        // BACKGRROUND
+        // BACKGRROUND:
         Texture2D Background =
             Graphics.LoadTexture("../../../../assets/graphics/Background.png");
 
@@ -136,7 +136,7 @@ namespace MohawkGame2D
             if (pumpkinHead.Y > groundLevel)
             {
                 pumpkinHead.Y = groundLevel;
-                Velocity.Y = 0; // Stop falling
+                Velocity.Y = 0; 
             }
 
 
