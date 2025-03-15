@@ -16,28 +16,36 @@ namespace MohawkGame2D
         // Place your variables here:
 
         bool playing = false;
+        
+        // PLATFORM
 
         Platform[] platforms = new Platform[13];
+
+        //BATS 
+
         Bat[] bats = new Bat[5];
         const float batTimerDefault = 1.5f;
         float batTimer = batTimerDefault;
         float batMinSpeed = 2;
         float batMaxSpeed = 5;
-        float batMinHeight = 100;
-        float batMaxHeight = 400;
+        float batMinHeight = 200;
+        float batMaxHeight = 500;
         float batSpawnX = 900;
+
+        //CANDY
 
         Candy[] candies = new Candy[3];
         int CandyCounter = 0;
+
+        //PLAYER
 
         Vector2 pumpkinHead;
         Vector2 pumpkinHeadSize = new Vector2(55, 82);
         float pumpkinHeadWidthOffset = 10;
         Vector2 Velocity;
-
-        float playerSpeed = 175;
-        float jumpStrength = 310; // Jump force
-        float gravity = 750; // Gravity speed
+        float playerSpeed = 175; 
+        float jumpStrength = 310; 
+        float gravity = 750; 
 
         // BACKGROUND
         Texture2D Background =
@@ -45,12 +53,12 @@ namespace MohawkGame2D
         Texture2D StartScreen =
             Graphics.LoadTexture("../../../../assets/graphics/StartScreen.png");
 
-        // BRIDGES:
+        // BRIDGE:
 
         Texture2D Bridge1 =
             Graphics.LoadTexture("../../../../assets/graphics/Bridge1.png");
 
-        // PUMPKIN HEAD:
+        // PUMPKIN HEAD CHARACTER:
 
         Texture2D pumpkinHeadTexture =
             Graphics.LoadTexture("../../../../assets/graphics/PumpkinHead.png");
@@ -63,6 +71,7 @@ namespace MohawkGame2D
 
             pumpkinHead = new Vector2(190, 190);
 
+            // ARRAY OF PLATFORMS
             platforms =
          [
             new Platform(new Vector2(45, 360), Platform.platform5),
