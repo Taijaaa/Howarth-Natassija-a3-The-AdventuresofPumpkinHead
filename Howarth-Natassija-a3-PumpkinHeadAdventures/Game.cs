@@ -39,6 +39,7 @@ namespace MohawkGame2D
 
         //PLAYER
 
+        int playerLives = 3;
         Vector2 pumpkinHead;
         Vector2 pumpkinHeadSize = new Vector2(55, 82);
         float pumpkinHeadWidthOffset = 10;
@@ -121,6 +122,9 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.OffWhite);
             Graphics.Draw(Background, 0, 0);
+
+            Text.Draw($"Lives: {playerLives}", new Vector2(20, 20));
+
 
             PlayerMovement();
 
@@ -210,8 +214,20 @@ namespace MohawkGame2D
 
         void RespawnPlayer()
         {
-            pumpkinHead = respawnPoint; 
-            Velocity = Vector2.Zero;
+            playerLives--;
+
+            if (playerLives > 0)
+            {
+                // Reset player position
+                pumpkinHead = respawnPoint;
+                Velocity = Vector2.Zero;
+            }
+            else
+            {
+                // If no lives left, return to menu
+                playing = false;
+                playerLives = 3; // Reset lives for the next game
+            }
         }
 
         void UpdateBats()
@@ -253,11 +269,11 @@ namespace MohawkGame2D
                         RespawnPlayer();
                     }
 
-                    // If the player falls off the screen, respawn them
                     if (pumpkinHead.Y > Window.Height)
                     {
                         RespawnPlayer();
                     }
+
                 }
             }
         }
