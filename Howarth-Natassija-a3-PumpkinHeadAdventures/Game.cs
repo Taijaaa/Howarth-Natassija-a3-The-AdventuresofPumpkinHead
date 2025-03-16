@@ -123,8 +123,7 @@ namespace MohawkGame2D
             Window.ClearBackground(Color.OffWhite);
             Graphics.Draw(Background, 0, 0);
 
-            Text.Draw($"Lives: {playerLives}", new Vector2(20, 20));
-
+            Text.Draw($"Lives: {playerLives}", Color.White, 16, new Vector2(20, 20));
 
             PlayerMovement();
 
