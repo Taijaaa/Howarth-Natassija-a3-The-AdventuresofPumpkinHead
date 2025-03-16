@@ -45,7 +45,8 @@ namespace MohawkGame2D
         Vector2 Velocity;
         float playerSpeed = 175; 
         float jumpStrength = 310; 
-        float gravity = 750; 
+        float gravity = 750;
+        Vector2 respawnPoint = new Vector2(190, 190);
 
         // BACKGROUND
         Texture2D Background =
@@ -213,6 +214,12 @@ namespace MohawkGame2D
 
 
         }
+        void RespawnPlayer()
+        {
+            pumpkinHead = respawnPoint; // Reset position
+            Velocity = Vector2.Zero; // Reset movement
+        }
+
         void UpdateBats()
         {
             if (batTimer > 0)
@@ -246,18 +253,20 @@ namespace MohawkGame2D
                     bat.position += bat.velocity;
                     Graphics.Draw(bat.texture, bat.position);
 
+                    // If the player collides with a bat, respawn them
                     if (Vector2.Distance(bat.position, pumpkinHead + pumpkinHeadSize / 2) < 40f)
                     {
-                        playing = false;
+                        RespawnPlayer();
                     }
+
+                    // If the player falls off the screen, respawn them
                     if (pumpkinHead.Y > Window.Height)
                     {
-                        playing = false;
-
+                        RespawnPlayer();
                     }
-
                 }
             }
         }
+
     }
 }
