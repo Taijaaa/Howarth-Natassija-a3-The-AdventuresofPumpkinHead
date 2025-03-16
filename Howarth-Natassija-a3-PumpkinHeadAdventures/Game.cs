@@ -14,15 +14,13 @@ namespace MohawkGame2D
     public class Game
     {
         // Place your variables here:
-
-        bool playing = false;
         
-        // PLATFORM
+        bool playing = false;
 
+        // PLATFORM
         Platform[] platforms = new Platform[13];
 
         //BATS 
-
         Bat[] bats = new Bat[5];
         const float batTimerDefault = 1.5f;
         float batTimer = batTimerDefault;
@@ -32,13 +30,11 @@ namespace MohawkGame2D
         float batMaxHeight = 500;
         float batSpawnX = 900;
 
-        //CANDY
-
+        // CANDY
         Candy[] candies = new Candy[5];
         int CandyCounter = 0;
 
         //PLAYER
-
         int playerLives = 3;
         Vector2 pumpkinHead;
         Vector2 pumpkinHeadSize = new Vector2(55, 82);
@@ -55,13 +51,11 @@ namespace MohawkGame2D
         Texture2D StartScreen =
             Graphics.LoadTexture("../../../../assets/graphics/StartScreen.png");
 
-        // BRIDGE:
-
+        // BRIDGE
         Texture2D Bridge1 =
             Graphics.LoadTexture("../../../../assets/graphics/Bridge1.png");
 
-        // PUMPKIN HEAD CHARACTER:
-
+        // PUMPKIN HEAD CHARACTER
         Texture2D pumpkinHeadTexture =
             Graphics.LoadTexture("../../../../assets/graphics/PumpkinHead.png");
 
@@ -117,18 +111,16 @@ namespace MohawkGame2D
             }
         }
         
-
         public void Playing()
         {
             Window.ClearBackground(Color.OffWhite);
             Graphics.Draw(Background, 0, 0);
 
-            Text.Draw($"Lives: {playerLives}", Color.White, 16, new Vector2(20, 20));
+            Text.Draw($"Lives: {playerLives}", new Vector2(20, 20));
 
             PlayerMovement();
 
             // BRIDGE RAILING
-
             Graphics.Draw(Bridge1, 260, 455);
 
             foreach (var platform in platforms)
@@ -187,7 +179,6 @@ namespace MohawkGame2D
 
         }
 
-
         void UpdateCandy()
         {
             for (int i = 0; i < candies.Length; i++)
@@ -223,9 +214,11 @@ namespace MohawkGame2D
             }
             else
             {
-                // If no lives left, return to menu
+                // If no lives left, return to menu and reset game
                 playing = false;
-                playerLives = 3; // Reset lives for the next game
+                playerLives = 3; 
+                CandyCounter = 0; 
+                candies = new Candy[5]; 
             }
         }
 
