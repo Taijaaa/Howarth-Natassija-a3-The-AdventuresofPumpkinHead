@@ -34,7 +34,7 @@ namespace MohawkGame2D
 
         //CANDY
 
-        Candy[] candies = new Candy[3];
+        Candy[] candies = new Candy[5];
         int CandyCounter = 0;
 
         //PLAYER
@@ -124,7 +124,7 @@ namespace MohawkGame2D
 
             PlayerMovement();
 
-            // bridge railing:
+            // BRIDGE RAILING
 
             Graphics.Draw(Bridge1, 260, 455);
 
@@ -171,7 +171,7 @@ namespace MohawkGame2D
 
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Space) && grounded)
             {
-                Velocity.Y = -jumpStrength; // Move up
+                Velocity.Y = -jumpStrength; 
             }
 
             if (!grounded)
@@ -179,7 +179,7 @@ namespace MohawkGame2D
                 Velocity.Y += gravity * Time.DeltaTime;
             }
 
-            // Apply movement to the character
+           
             pumpkinHead += Velocity * Time.DeltaTime;
 
         }
@@ -189,35 +189,29 @@ namespace MohawkGame2D
         {
             for (int i = 0; i < candies.Length; i++)
             {
-                if (candies[i] == null)
+                if (candies[i] == null) 
                 {
-                    candies[i] = new Candy();
-                    break;
-                }
-                else
-                {
-
-                    Graphics.Draw(candies[i].texture, candies[i].position);
+                    candies[i] = new Candy(); 
                 }
 
+                Graphics.Draw(candies[i].texture, candies[i].position);
+
+                // Check if the player collects the candy
                 if (Vector2.Distance(candies[i].position, pumpkinHead + pumpkinHeadSize / 2) < 30f)
                 {
                     candies[i] = null;
-
-                    CandyCounter++;
-
+                    CandyCounter++; 
                 }
-
             }
 
-            Text.Draw(CandyCounter.ToString(), new Vector2(400, 0));
-
-
+            // Display candy count
+            Text.Draw($"Candy: {CandyCounter}", new Vector2(400, 0));
         }
+
         void RespawnPlayer()
         {
-            pumpkinHead = respawnPoint; // Reset position
-            Velocity = Vector2.Zero; // Reset movement
+            pumpkinHead = respawnPoint; 
+            Velocity = Vector2.Zero;
         }
 
         void UpdateBats()
