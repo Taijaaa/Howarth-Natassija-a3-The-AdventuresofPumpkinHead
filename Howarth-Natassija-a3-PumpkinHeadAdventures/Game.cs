@@ -45,6 +45,8 @@ namespace MohawkGame2D
         float gravity = 750;
         Vector2 respawnPoint = new Vector2(190, 190);
 
+        Music backgroundMusic;
+
         // BACKGROUND
         Texture2D Background =
             Graphics.LoadTexture("../../../../assets/graphics/Background.png");
@@ -59,11 +61,15 @@ namespace MohawkGame2D
         Texture2D pumpkinHeadTexture =
             Graphics.LoadTexture("../../../../assets/graphics/PumpkinHead.png");
 
+
         public void Setup()
         {
 
             Window.SetTitle("The Adventures of Pumpkin Head");
             Window.SetSize(800, 600);
+
+            backgroundMusic = Audio.LoadMusic("../../../../assets/Audio/GameSong.MP3");
+            Audio.Play(backgroundMusic);
 
             pumpkinHead = new Vector2(190, 190);
 
